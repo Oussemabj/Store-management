@@ -2,6 +2,7 @@ package tn.iit.storemanagment.mapper;
 
 
 import org.springframework.util.CollectionUtils;
+import tn.iit.storemanagment.dto.IdentifiableDto;
 import tn.iit.storemanagment.models.Identifiable;
 
 import java.util.Collection;
@@ -15,9 +16,8 @@ import static java.util.stream.Collectors.toList;
  *
  * @param <ENTITY> the entity type.
  * @param <DTO>    the DTO type.
- * @author Oussema Ben Jmeaa
  */
-public interface Mapper<ENTITY extends Identifiable<?>, DTO> {
+public interface Mapper<ENTITY extends Identifiable<?>, DTO extends IdentifiableDto<?>>  {
 
     String SPRING = "spring";
 
@@ -27,7 +27,7 @@ public interface Mapper<ENTITY extends Identifiable<?>, DTO> {
      * @param entity the object to be converted.
      * @return the entity converted to DTO.
      */
-    DTO map(ENTITY entity);
+    DTO mapToDto(ENTITY entity);
 
     /**
      * Convert from DTO to ENTITY.
@@ -35,22 +35,22 @@ public interface Mapper<ENTITY extends Identifiable<?>, DTO> {
      * @param dto the object to be converted.
      * @return the dto converted to ENTITY.
      */
-    ENTITY map(DTO dto);
+    ENTITY mapToEntity(DTO dto);
 
-    /**
-     * Convert from List<DTO> to List<ENTITY>.
-     *
-     * @param dtos the list of DTO's
-     * @return the dtos converted to entities.
-     */
-    default List<ENTITY> mapToEntities(final Collection<DTO> dtos) {
-        if (CollectionUtils.isEmpty(dtos)) {
-            return Collections.emptyList();
-        }
-        return dtos.stream()
-                .map(this::map)
-                .collect(toList());
-    }
+//    /**
+//     * Convert from List<DTO> to List<ENTITY>.
+//     *
+//     * @param dtos the list of DTO's
+//     * @return the dtos converted to entities.
+//     */
+//    default List<ENTITY> mapToEntities(final Collection<DTO> dtos) {
+//        if (CollectionUtils.isEmpty(dtos)) {
+//            return Collections.emptyList();
+//        }
+//        return dtos.stream()
+//                .map(this::mapToEntity)
+//                .collect(toList());
+//    }
 
     /**
      * Convert from List<ENTITY> to List<DTO>.
@@ -63,7 +63,7 @@ public interface Mapper<ENTITY extends Identifiable<?>, DTO> {
             return Collections.emptyList();
         }
         return entities.stream()
-                .map(this::map)
+                .map(this::mapToDto)
                 .collect(toList());
     }
 

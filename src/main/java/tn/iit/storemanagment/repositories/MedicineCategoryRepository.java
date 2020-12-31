@@ -12,4 +12,5 @@ public interface MedicineCategoryRepository extends JpaRepository<MedicineCatego
 
     boolean existsByName(String name);
 
+
 }

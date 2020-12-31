@@ -14,4 +14,5 @@ public class MedicineDto extends IdentifiableDto<Long>{
     private static final long serialVersionUID = 1L;
     private String name;
     private String price;
+    private String  categoryId;
 }

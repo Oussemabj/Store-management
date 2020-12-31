@@ -9,11 +9,11 @@ import tn.iit.storemanagment.models.Medicine;
 public interface MedicineMapper extends Mapper <Medicine, MedicineDto> {
 
     @Override
-    @Mapping(source = "MedicineCategory.id",target = "medicineCategoryId")
-    MedicineDto map(Medicine medicine);
+    @Mapping(source = "medicineCategory.id",target = "categoryId")
+    MedicineDto mapToDto(Medicine medicine);
 
     @Override
-    @Mapping(source = "medicineCategoryId",target = "MedicineCategory.id")
-    Medicine map(MedicineDto medicineDto) ;
+    @Mapping(source = "categoryId",target = "medicineCategory.id")
+    Medicine mapToEntity(MedicineDto medicineDto) ;
 
 }

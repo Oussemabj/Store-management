@@ -17,7 +17,7 @@ public class CorsFilter implements Filter {
             throws IOException, ServletException {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        System.out.println("CORSFilter HTTP Request: " + request.getMethod());
+//        System.out.println("CORSFilter HTTP Request: " + request.getMethod());
 
         // Authorize (allow) all domains to consume the content
         ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", "*");
@@ -31,7 +31,6 @@ public class CorsFilter implements Filter {
         // For HTTP OPTIONS verb/method reply with ACCEPTED status code -- per CORS handshake
         if (request.getMethod().equals("OPTIONS")) {
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);
-            //System.out.println("aaaaaaaaaaaa");
             return;
         }
 

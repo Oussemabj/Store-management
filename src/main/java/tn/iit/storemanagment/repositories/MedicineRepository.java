@@ -13,6 +13,6 @@ public interface MedicineRepository extends JpaRepository<Medicine,Long> {
 //
 //    Medicine findByPrice(float price);
     boolean existsByName(String name);
-    List<Medicine> findMedicineByCategoryId(Long medicineId);
-    void deleteMedicineByCategoryId(Long categoryId);
+    List<Medicine> findMedicinesByMedicineCategoryName(String categoryName);
+    void deleteMedicinesByMedicineCategoryId(Long categoryId);
 }
