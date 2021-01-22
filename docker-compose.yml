@@ -1,0 +1,45 @@
+version: "3.0"
+volumes:
+  store-management-mysql:
+  medical-file-mysql:
+
+services:
+  medical-file-mysql:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: medical-file
+      MYSQL_USER: root
+      MYSQL_ROOT_HOST": 'root'
+    volumes:
+       medical-file-mysql: /var/lib/mysql
+
+  store-management-mysql:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: store-management
+      MYSQL_USER: root
+      MYSQL_ROOT_HOST: 'root'
+    volumes:
+      - store-management-mysql: var/lib/mysql:/var/lib/mysql
+
+  store-management:
+    image: store-management
+    ports:
+      - 9500:9191
+    depends_on:
+      - store-management-mysql
+
+  medical-file:
+    image: medical-file
+    ports:
+      - 9501:9192
+    depends_on:
+      - medical-file-mysql
+
+
